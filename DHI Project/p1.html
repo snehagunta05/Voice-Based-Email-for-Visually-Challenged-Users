@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html >
+<head><title>Voice Based Email</title>
+<style>				
+body {
+  background-image :url('https://cdn1.tnwcdn.com/wp-  content/blogs.dir/1/files/2016/09/voice.jpg');
+  font-family: "TIMES NEW ROMAN";
+}.h1{
+    font-size:50px;
+    color: white;
+}.button{
+  background-color: Orange;
+  font-size: 40px;
+}</style>
+<script>
+	function openInNewTab() {
+		window.location.replace('http://127.0.0.1:8000/welc/');
+	}
+	function openInNewTab1() {
+		window.location.replace('http://127.0.0.1:8000/regisopen');
+	}
+	function vld() {
+		window.location.replace('http://127.0.0.1:8000/openlog');
+	}
+</script>
+</head>
+<body>
+<center><form><h1 > Welcome to Voice Based Email For Blind </h1> </center><br><center>
+            <button value="Register" id="register" >Register</button><br><br>
+             <center><h2 "> OR </h2> </center>
+            <button  value="Login" id="login" >Login</button></form>
+<script>
+            var res={{check}};
+            if(res==0){
+            openInNewTab();
+            }
+            </script>
+            <script>
+            var num={{count}};
+            if(num==2){
+            openInNewTab1();
+            }
+            </script>
+        <script>
+            var num1={{count}};
+            if(num1==3){
+            vld();
+            }
+            </script>
+</body>
+</html>
+
+
+
+->Register.html
+<!DOCTYPE html>
+<html >
+<head><title>Voice Based Email</title>
+<style>
+body {
+  background-image :url('https://cdn1.tnwcdn.com/wp-  content/blogs.dir/1/files/2016/09/voice.jpg');
+  font-family: "TIMES NEW ROMAN";
+} .h1, h2{
+    font-size:50px;
+    color: white;
+}  .button {
+  background-color: Orange;
+  font-size: 40px;
+} </style>
+<script>
+	function openInNewTab() {
+		window.location.replace('http://127.0.0.1:8000/regisemail');
+	}
+	function openInNewTab1() {
+		window.location.replace('http://127.0.0.1:8000/regissecurity');
+	}
+	function vld() {
+		window.location.replace('http://127.0.0.1:8000/regispasswd');
+	}
+	function updat() {
+		window.location.replace('http://127.0.0.1:8000/update1');
+	}
+</script>
+</head>
+<body>
+<center><h1 >Voice Based Email For Blind </h1> </center>
+  <br> <center><h2 >Register</h2></center>
+ <center><form method="get" ><br><br>
+  <div style="text-align:center;">
+ <h2 >Email:</h2><input type="email" value="{{emailp}}"id="email1"size="30"><br><br>
+ <h2 >Security Code:</h2><input type ="text" value="{{security1}}" size="30"><br><br>
+  <h2 >Password:</h2><input type ="text" value="{{passwd1}}" size="30"><br><br>
+   </div></form></center>
+<script>
+            var res={{check}};
+            if(res==0){
+            openInNewTab();
+            }
+            </script>
+            <script>
+            var num={{count}};
+            if(num==2){
+            openInNewTab1();
+            }
+            </script>
+        <script>
+            var num1={{count}};
+            if(num1==3){
+            vld();
+            }
+            if(num1==4){
+            updat();
+            }
+            </script>
+</body>
+</html>
+
+->Login.html:
+<!DOCTYPE html>
+<html >
+<head><title>Voice Based Email</title>
+<style>
+body {
+  background-image :url('https://cdn1.tnwcdn.com/wp-  content/blogs.dir/1/files/2016/09/voice.jpg');
+  font-family: "TIMES NEW ROMAN";
+} .h1, h2{
+    font-size:50px;
+    color: white;
+}</style>
+<script>
+	function openInNewTab() {
+		window.location.replace('http://127.0.0.1:8000/new/');
+	}
+	function openInNewTab1() {
+		window.location.replace('http://127.0.0.1:8000/pass12');
+	}
+	function vld() {
+		window.location.replace('http://127.0.0.1:8000/val');
+	}
+	function home() {
+		window.location.replace('http://127.0.0.1:8000/home123');
+	}
+</script>
+</head>
+<body>
+<br> <center><h1> Welcome to Voice Based Email For Blind </h1> </center>
+  <center><h2 >Login Page</h2></center><br><br>
+ <center><form method="get" >
+ <h2 >Email:</h2>
+ <input type="email" value="{{emailput}}" id="email1" ><br><br>
+ <h2 >Password:</h2>
+ <input type ="text" value="{{passw1}}" id="password1"  >
+  </form></center>
+<script>
+            var res={{check}};
+            if(res==0){
+            openInNewTab();
+            }
+            </script>
+            <script>
+            var num={{count}};
+            if(num==2){
+            openInNewTab1();
+            }
+            </script>
+        <script>
+            var num1={{count}};
+            if(num1==3){
+            vld();
+            }
+            if(num1==4){
+            home();
+            }
+            </script>
+</body>
+</html>  
+->Home.html:
+<!DOCTYPE html>
+<html >
+<head><title>Voice Based Email</title>
+<style>
+body {
+  background-image :url('https://cdn1.tnwcdn.com/wp-  content/blogs.dir/1/files/2016/09/voice.jpg');
+  font-family: "TIMES NEW ROMAN";
+} h2{
+ font-size:50px;
+    }
+</style>
+<script>
+    function homePg() {
+		window.location.replace('http://127.0.0.1:8000/mai/');
+	}
+	function composeMail() {
+		window.location.replace('http://127.0.0.1:8000/compose123/');
+	}
+	function inboxMail(){
+		window.location.replace('http://127.0.0.1:8000/inbox123/');
+	}
+	function logout(){
+		window.location.replace('http://127.0.0.1:8000/logout123/');
+	}
+</script>s
+</head>
+<body>
+<center><h2 >Home Page</h2></center><br><br>
+ <center><form method="get" >
+<br>  <button  id="compose">1.Compose a new mail </button><br><br>
+ <br> <button  id="inbox" >2.Check the Inbox </button><br><br>
+ <br>  <button  id="logout" >3.Logout</button><br><br>
+ </form>
+<script>
+            var val={{check}};
+            if(val==1){
+            homePg();
+            }
+            </script>
+                <script>
+                var num={{count}};
+                document.write(num);
+                if(num==1){
+                composeMail();
+                }
+            if(num==2)
+            {
+            inboxMail();
+            }
+            if(num==3)
+            {
+            logout();
+            }
+
+            </script>
+</body>
+</html>
+->Compose.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compose a new mail</title>
+    <style>
+    h1{
+    color: blue;
+    font-size:35px;
+    font-family:Times New Roman;
+    }
+    body{
+    background-image :url('https://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2016/09/voice.jpg');>
+    font-size:20px;
+    font-family:Times New Roman;
+    }
+    h1,h2{
+    font-size:20px;
+    color: white;
+    display: inline;
+}
+    textarea{
+    font-size:18px;
+    font-family:Times New Roman;
+    }
+    .center-textarea {
+            text-align: center;
+        }
+    </style>
+    <script>
+    function inner() {window.location.replace('http://127.0.0.1:8000/rec1/');	}
+    function sub() {window.location.replace('http://127.0.0.1:8000/sub1/');}
+   function bod() {window.location.replace('http://127.0.0.1:8000/bod1/');}
+  function homePg() {window.location.replace('http://127.0.0.1:8000/home123/');}
+	function compl() {
+		window.location.replace('http://127.0.0.1:8000/home10/');
+	}
+	</script>
+</head>
+<body>
+<div class="center-textarea">
+<h1 ><label>Compose a new mail</label</h1><br>
+ <h2 >From:</h2><br><textarea id="from1" name="from2" rows="1" cols="100">{{sendr}}</textarea>
+ <h2>To:</h2><br><textarea id="to1" name="to2" rows="1" cols="100">{{recev}}</textarea>
+<h2 >Subject:</h2><br><textarea id="subj" name="sa2" rows="2" cols="100">{{subj}}</textarea><br>
+ <label>Body:<br></label><textarea id="bo" name="s82" rows="18" cols="100">{{bdy}}</textarea>
+</div>
+<script>
+var val={{check}};
+            if(val==1){ inner(); }
+var num={{count}};
+            if(num==1){ sub();}
+            if(num==2){ bod();}
+            if(num==3){homePg();}
+            if(num==10){compl();}
+            </script>
+</body>
+</html>
+->Inbox.html:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>inbox</title>
+    <style>
+    body{
+    background-image :url('https://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2016/09/voice.jpg');>}
+    h1{
+    font-size:60px;
+    }
+    h1,h2{
+    font-size:20px;
+    color: white;
+    text-align: left
+    display: inline;
+}
+    textarea{
+    font-size:18px;
+    font-family:Times New Roman;
+    }
+    .center-textarea {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function readInb() {
+		window.location.replace('http://127.0.0.1:8000/readinbox/');}
+function speakInb() {
+		window.location.replace('http://127.0.0.1:8000/speakinbox/');}
+function homePg() {
+		window.location.replace('http://127.0.0.1:8000/home123');}
+</script>
+ <div class="center-textarea">
+<h1 ><label>Inbox</label></h1><br>
+<h2 >Sender:</h2><br><textarea id="from1" name="from2" rows="1" cols="100">{{Sender}}</textarea>
+ <h2 >Date:</h2><br><textarea id="to1" name="to2" rows="1" cols="100">{{Date}}</textarea>
+   <h2 >Subject:</h2><br><textarea id="subj" name="sa2" rows="2" cols="100">{{Subject}}</textarea><br>
+   <label >Body:<br></label><textarea id="bo" name="s82" rows="18" cols="100">{{Body}}</textarea>
+</div>
+  <script>
+            var num={{count}};
+            if(num==1){
+            readInb();
+            }
+            if(num==2)
+            {
+            homePg();
+            }
+            if(num==10)
+            {
+            speakInb();
+            }
+ </script>
+</body>
+</html>

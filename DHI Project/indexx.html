@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice-Based Email</title>
+  <link ref="php" href="back.php">
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Voice-Based Email System</h1>
+  <button onclick="startListening()">🎤 Speak Command</button>
+  <p id="command">Your command will appear here...</p>
+  <div id="response"></div>
+
+  <script>
+    // Speech Recognition
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+
+    function startListening() {
+      recognition.start();
+    }
+
+    recognition.onresult = function(event) {
+      const command = event.results[0][0].transcript;
+      document.getElementById("command").innerText = "You said: " + command;
+
+      // Send command to backend
+      fetch("backend.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ command: command })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("response").innerText = data.response;
+        speak(data.response); // Read aloud response
+      });
+    };
+
+    // Text-to-Speech
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>

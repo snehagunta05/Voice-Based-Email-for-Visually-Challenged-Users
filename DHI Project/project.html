@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voice Email System</title>
+  <meta charset="utf-8" />
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 760px; margin: 20px auto; }
+    textarea, input { width: 100%; margin: 8px 0; padding: 10px; font-size: 16px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; }
+    button { padding: 10px 14px; }
+    .hint { color: #666; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h2>Compose mail</h2>
+
+  <label for="message"><strong>Message:</strong></label>
+  <textarea id="message" rows="6" placeholder="Speak your message. Left-click to edit. Right-click to confirm."></textarea>
+  <div class="row">
+    <button id="msgSpeak">🎤 Speak message</button>
+    <button id="msgReplay">🔊 Replay message</button>
+    <button id="msgConfirm">✔ Confirm message</button>
+  </div>
+  <p class="hint">Tip: Left-click inside the box to edit text. Right-click inside the box to confirm the final message.</p>
+
+  <label for="recipient"><strong>Recipient email:</strong></label>
+  <input id="recipient" type="text" placeholder="Speak recipient email. Left-click to edit. Right-click to confirm." />
+  <div class="row">
+    <button id="rcpSpeak">🎤 Speak recipient</button>
+    <button id="rcpReplay">🔊 Replay recipient</button>
+    <button id="rcpConfirm">✔ Confirm recipient</button>
+  </div>
+
+  <div class="row">
+    <button id="sendBtn">📧 Send Mail</button>
+  </div>
+
+<script>
+  // Helpers: TTS and STT
+function speak(text) {
+    if (!text) return;
+    const msg = new SpeechSynthesisUtterance(text);
+    msg.rate = 1.0; // adjust speed if needed
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(msg);
+  }
+
+  function startRecognition(onDone) {
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+      alert("Speech recognition not supported in this browser.");
+      return;
+    }
+    const rec = new Recognition();
+    rec.lang = "en-US";
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    rec.onresult = (event) => {
+      const transcript = event.results[0][0].transcript.trim();
+      onDone(transcript);
+    };
+    rec.onerror = () => speak("Sorry, I couldn't understand. Please try again.");
+    rec.start();
+    speak("Listening...");
+  }
+  // Elements
+  const messageEl = document.getElementById("message");
+  const recipientEl = document.getElementById("recipient");
+
+  // Message: speak → fill → replay → confirm
+  document.getElementById("msgSpeak").addEventListener("click", () => {
+    startRecognition((t) => {
+      messageEl.value = t;
+      speak("Message captured. Say replay to listen again, or edit with left click.");
+    });
+  });
+
+  document.getElementById("msgReplay").addEventListener("click", () => {
+    const text = messageEl.value;
+    if (!text) return speak("No message found. Please speak your message first.");
+    speak(text);
+  });
+
+  document.getElementById("msgConfirm").addEventListener("click", () => {
+    if (!messageEl.value) return speak("No message to confirm.");
+    speak("Message confirmed.");
+    messageEl.dataset.confirmed = "true";
+  });
+
+  // Right-click inside message to confirm (your requirement)
+  messageEl.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (!messageEl.value) return speak("No message to confirm.");
+    messageEl.dataset.confirmed = "true";
+    speak("Message confirmed by right click.");
+  });
+// Recipient: speak → fill → replay → confirm
+  document.getElementById("rcpSpeak").addEventListener("click", () => {
+    startRecognition((t) => {
+      // Normalize common spoken email words (optional improvements)
+      const normalized = t
+        .replace(/\s+at\s+/gi, "@")
+        .replace(/\s+dot\s+/gi, ".")
+        .replace(/\s+underscore\s+/gi, "_");
+      recipientEl.value = normalized;
+      speak("Recipient captured. Replay to listen again, or edit with left click.");
+    });
+  });
+
+  document.getElementById("rcpReplay").addEventListener("click", () => {
+    const text = recipientEl.value;
+    if (!text) return speak("No recipient found. Please speak the recipient first.");
+    speak(text);
+  });
+
+  document.getElementById("rcpConfirm").addEventListener("click", () => {
+    if (!recipientEl.value) return speak("No recipient to confirm.");
+    recipientEl.dataset.confirmed = "true";
+    speak("Recipient confirmed.");
+  });
+
+  // Right-click inside recipient to confirm
+  recipientEl.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if (!recipientEl.value) return speak("No recipient to confirm.");
+    recipientEl.dataset.confirmed = "true";
+    speak("Recipient confirmed by right click.");
+  });
+// Send mail
+  document.getElementById("sendBtn").addEventListener("click", () => {
+    const msg = messageEl.value.trim();
+    const rcp = recipientEl.value.trim();
+
+    if (!msg) return speak("Please provide a message.");
+    if (!rcp) return speak("Please provide a recipient email.");
+    if (!isEmail(rcp)) return speak("Recipient email looks invalid. Please edit and confirm.");
+
+    if (messageEl.dataset.confirmed !== "true") return speak("Please confirm the message by right click or confirm button.");
+    if (recipientEl.dataset.confirmed !== "true") return speak("Please confirm the recipient by right click or confirm button.");
+
+    const body = new URLSearchParams({ recipient: rcp, message: msg }).toString();
+    fetch("sendMail.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    })
+    .then(res => res.text())
+    .then(text => {
+      speak(text);
+    })
+    .catch(() => {
+      speak("Error sending mail. Please try again.");
+    });
+  });
+</script>
+</body>
+</html>
